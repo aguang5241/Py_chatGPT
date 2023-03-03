@@ -7,7 +7,7 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 * Can save/load the chat history to a text file.
 
 2. Py_chatGPT_voice.py:
-* Real-time communication with the chatbot
+* Real-time communication with the chatbot by voice.
 * Can save/load the chat history to a text file.
 * Based the most popular Google Text-to-Speech API to convert text to speech and the Whisper API to convert speech to text.
 
