@@ -27,4 +27,5 @@ while True:
     with open(f'chatlog_{now}.txt', 'a') as f:
         f.write('assistant: ' + assistant + '\n')
 
-    print('Assistant: ' + assistant)
+    # print assistant response in blue
+    print('\033[94m' + 'Assistant: ' + assistant + '\033[0m')
