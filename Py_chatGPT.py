@@ -1,7 +1,5 @@
-
 import openai
-import time
-import os, sys, getopt
+import os, time
 
 # Get current time and only keep the numbers
 now = time.strftime("%Y%m%d%H%M%S", time.localtime())[2:]
