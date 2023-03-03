@@ -1,5 +1,5 @@
-import openai
 import os, time
+import openai
 
 # Get current time and only keep the numbers
 now = time.strftime('%H%M%S', time.localtime())
@@ -17,6 +17,9 @@ while True:
         print('File does not exist. Please try again.')
 
 openai.api_key_path = os.path.join(os.path.dirname(__file__), 'openai_api_key.txt')
+
+greeting = 'Welcome to the chatGPT. How can I help you?'
+print('\033[94m' + 'Assistant: ' + greeting + '\033[0m')
 
 while True:
     user = input('User: ')
