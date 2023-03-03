@@ -4,12 +4,12 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 ## Introduction
 1. ***Py_chatGPT_text.py***
 * Communicate with the chatbot by typing.
-* Can save/load the chat history to a text file.
+* Can save/load the chat history.
 
 2. ***Py_chatGPT_voice.py***
 * Real-time communication with the chatbot by voice.
-* Can save/load the chat history to a text file.
-* Based the most popular Google Text-to-Speech API to convert text to speech and the Whisper API to convert speech to text.
+* Can save/load the chat history.
+* Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
 
 ## Getting Started
 1. Prepare your own chatGPT api key and save it in the `openai_api_key.txt` file
