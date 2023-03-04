@@ -13,13 +13,12 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44400
 INITIAL_SECONDS = 2
-THRESHOLD = 100
-TOLLERANCE = 50
+TOLLERANCE = 100
 
 # Get current time and only keep the numbers
 now = time.strftime('%H%M%S', time.localtime())
-assi_mp3 = f'assistant_{now}.mp3'
-user_mp3 = f'user_{now}.mp3'
+assi_mp3 = 'assistant.mp3'
+user_mp3 = 'user.mp3'
 
 # To choose if you want to continue a previous chat or start a new one
 while True:
@@ -42,6 +41,17 @@ tts = gTTS('Welcome to the chatGPT. How can I help you?', lang='en', slow=False)
 tts.save(assi_mp3)
 playsound(assi_mp3)
 
+# Recording the environment for 1 second to set the threshold
+pa = pyaudio.PyAudio()
+stream = pa.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+env = []
+for i in range(0, int(RATE / CHUNK * 1)):
+    data = stream.read(CHUNK)
+    data_int = struct.unpack(str(2*CHUNK) +'B', data)
+    avg_data=sum(data_int)/len(data_int)
+    env.append(avg_data)
+threshold = sum(env)/len(env)
+
 while True:
     # Start recording
     pa = pyaudio.PyAudio()
@@ -49,8 +59,7 @@ while True:
     print('Recording...')
 
     frames = []
-    seconds = INITIAL_SECONDS
-    for i in range(0, int(RATE / CHUNK * seconds)):
+    for i in range(0, int(RATE / CHUNK * INITIAL_SECONDS)):
         data = stream.read(CHUNK)
         frames.append(data)
 
@@ -65,7 +74,7 @@ while True:
         # Recording chunk data
         frames.append(data)
         # if avg_data samller than THRESHOLD for TOLLERANCE times, stop recording
-        if avg_data < THRESHOLD:
+        if avg_data < threshold:
             i += 1
             if i > TOLLERANCE:
                 break
