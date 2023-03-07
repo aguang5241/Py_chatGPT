@@ -1,6 +1,8 @@
 # Py_chatGPT
 Python-based chatbot using chatGPT API, supporting both text-based and voice-based chatting.   
+
 [***Bilibili***](https://www.bilibili.com/video/BV1554y1u75j/?share_source=copy_web&vd_source=52c5fec8348a24e00d38c36bc12b5a7d)     
+
 [***YouTube***](https://youtu.be/H9Ss8RYrTw8)
 
 ## Introduction
