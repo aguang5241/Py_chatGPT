@@ -10,7 +10,14 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 * Communicate with the chatbot by typing.
 * Can save/load the chat history.
 
-2. ***Py_chatGPT_voice.py***
+2. ***Py_chatGPT_voice_auto.py***
+* Will automatically start and stop the recording based on the voice activity.
+* Real-time communication with the chatbot by voice.
+* Can save/load the chat history.
+* Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
+
+3. ***Py_chatGPT_voice_manual.py (Recommended)***
+* Need to manually start and stop the recording.
 * Real-time communication with the chatbot by voice.
 * Can save/load the chat history.
 * Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
@@ -27,6 +34,13 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
     ``` 
     or
     ```bash
-    python3 Py_chatGPT_voice.py
+    python3 Py_chatGPT_voice_auto.py
+    ```
+    or
+    ```bash
+    python3 Py_chatGPT_voice_manual.py
     ```
 4. Enjoy!
+
+*****
+***Note: the python version version I used is 3.9.6, different versions may have different results.***
