@@ -3,7 +3,7 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 
 [***Bilibili***](https://www.bilibili.com/video/BV1554y1u75j/?share_source=copy_web&vd_source=52c5fec8348a24e00d38c36bc12b5a7d)     
 
-[***YouTube***](https://youtu.be/H9Ss8RYrTw8)
+[***YouTube***](https://www.youtube.com/watch?v=YWwDv7xUyM4)
 
 ## Introduction
 ### Software
