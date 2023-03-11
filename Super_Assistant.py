@@ -9,7 +9,7 @@ from gtts import gTTS
 from playsound import playsound
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtCore import QThread, pyqtSignal
-from Super_Assistant_UI_win import Ui_MainWindow as Super_Assistant_UI
+from Super_Assistant_UI import Ui_MainWindow as Super_Assistant_UI
 
 
 class Call_ChatGPT(QThread):
@@ -120,6 +120,8 @@ class Super_Assistant(QMainWindow):
         self.channel = 1
         self.rate = 44100
         self.recorder = Recorder()
+        self.role = 'Oral Teacher'
+        self.language = 'English'
         self.languages_dict = {'Chinese': 'zh-CN', 
                                'English': 'en', 
                                'French': 'fr', 
@@ -133,7 +135,7 @@ class Super_Assistant(QMainWindow):
                                'Swedish': 'sv'}
 
         # Initialize the messages list
-        self.messages = [{'role': 'user', 'content': 'From now on, your role is my Oral English Teacher. Please keep your responses as short as possible. And you should stop and correct me at any time once you find my grammar is wrong.'}, {'role': 'assistant', 'content': 'Yes.'}]
+        self.messages = [{'role': 'user', 'content': 'From now on, your role is my Oral English Teacher. Please keep your following responses in English as short as possible. And you should stop and correct me at any time once you find my grammar is wrong.'}, {'role': 'assistant', 'content': 'Yes.'}]
         
         # Set the API key path at the beginning
         default_api_key_path = os.path.join(self.root_path, '../openai_api_key.txt')
@@ -159,22 +161,9 @@ class Super_Assistant(QMainWindow):
         self.ui.textBrowser.append(f"<p style='color:blue'>{self.greeting}</p>")
 
         # Uncheck the others when one is checked in the menuRoles
-        self.ui.actionAisearch.triggered.connect(self.uncheck_roles)
-        self.ui.actionChatbot.triggered.connect(self.uncheck_roles)
-        self.ui.actionOral_Teacher.triggered.connect(self.uncheck_roles)
-
-        # Uncheck the others when one is checked in the menuLanguages
-        self.ui.actionChinese.triggered.connect(self.uncheck_languages)
-        self.ui.actionEnglish.triggered.connect(self.uncheck_languages)
-        self.ui.actionFrench.triggered.connect(self.uncheck_languages)
-        self.ui.actionGerman.triggered.connect(self.uncheck_languages)
-        self.ui.actionItalian.triggered.connect(self.uncheck_languages)
-        self.ui.actionJapanese.triggered.connect(self.uncheck_languages)
-        self.ui.actionKorean.triggered.connect(self.uncheck_languages)
-        self.ui.actionPolish.triggered.connect(self.uncheck_languages)
-        self.ui.actionRussian.triggered.connect(self.uncheck_languages)
-        self.ui.actionSpanish.triggered.connect(self.uncheck_languages)
-        self.ui.actionSwedish.triggered.connect(self.uncheck_languages)
+        self.ui.actionAisearch.triggered.connect(self.set_roles)
+        self.ui.actionChatbot.triggered.connect(self.set_roles)
+        self.ui.actionOral_Teacher.triggered.connect(self.set_roles)
 
         # Set the language and enter the Oral Teacher mode
         self.ui.actionChinese.triggered.connect(self.set_language)
@@ -188,6 +177,9 @@ class Super_Assistant(QMainWindow):
         self.ui.actionRussian.triggered.connect(self.set_language)
         self.ui.actionSpanish.triggered.connect(self.set_language)
         self.ui.actionSwedish.triggered.connect(self.set_language)
+
+        # Enter the Oral Teacher mode
+        self.ui.actionOral_Teacher.triggered.connect(self.oral_teacher)
 
         # Enter the Chatbot mode
         self.ui.actionChatbot.triggered.connect(self.chatbot)
@@ -214,18 +206,6 @@ class Super_Assistant(QMainWindow):
         # Load the chatlog from a txt file
         self.ui.actionLoad.triggered.connect(self.load_chatlog)
 
-    def uncheck_roles(self):
-        checked_action = self.sender()
-        for action in self.ui.menuRoles.actions():
-            if action != checked_action:
-                action.setChecked(False)
-    
-    def uncheck_languages(self):
-        checked_action = self.sender()
-        for action in self.ui.menuLanguages.actions():
-            if action != checked_action:
-                action.setChecked(False)
-
     def set_audio(self):
         if self.ui.checkBox.isChecked():
             self.audio_on = True
@@ -234,13 +214,58 @@ class Super_Assistant(QMainWindow):
             self.audio_on = False
             self.ui.checkBox.setText('Audio Off')
 
-    def set_language(self):
-        # Set groupBox title to Oral Teacher
-        self.ui.groupBox.setTitle('Role: Oral Teacher')
-        # Set the language code
+    def audio(self, text, language_code):
+        tts = gTTS(text, lang=language_code, slow=False)
+        # Delete the old audio file
+        if os.path.exists(self.assi_mp3):
+            os.remove(self.assi_mp3)
+            # print('Deleting the existing assi.mp3 file...')
+        tts.save(self.assi_mp3)
+        playsound(self.assi_mp3)
+
+    def set_roles(self):
+        # Uncheck the others when one is checked in the menuRoles
         checked_action = self.sender()
+        for action in self.ui.menuRoles.actions():
+            if action != checked_action:
+                action.setChecked(False)
+        # Make sure there must be a role selected
+        if checked_action.isChecked() == False:
+            checked_action.setChecked(True)
+        # Set the role
+        role = checked_action.text()
+        if role == 'Oral Teacher':
+            self.role = 'Oral Teacher'
+        elif role == 'Chatbot':
+            self.role = 'Chatbot'
+        elif role == 'Aisearch':
+            self.role = 'Aisearch'
+
+    def set_language(self):
+        # Uncheck the others when one is checked in the menuLanguages
+        checked_action = self.sender()
+        for action in self.ui.menuLanguages.actions():
+            if action != checked_action:
+                action.setChecked(False)
+        # Make sure there must be a language selected
+        if checked_action.isChecked() == False:
+            checked_action.setChecked(True)
+        # Set the language and language code
         language = checked_action.text()
+        self.language = language
         self.language_code = self.languages_dict[language]
+        # Call different roles
+        if self.role == 'Oral Teacher':
+            self.oral_teacher()
+        elif self.role == 'Chatbot':
+            self.chatbot()
+        elif self.role == 'Aisearch':
+            self.aisearch()
+
+    def oral_teacher(self):
+        # Set groupBox title to Chatbot
+        self.ui.groupBox.setTitle('Role: Chatbot')
+        # Set the greeting in the textBrowser
         if self.language_code == 'en':
             self.greeting = f'Welcome to the Oral Teacher Mode. I will help you to improve your oral English. How can I help you?'
         elif self.language_code == 'zh-CN':
@@ -268,24 +293,12 @@ class Super_Assistant(QMainWindow):
         self.ui.textBrowser.append(f"<p style='color:blue'>Assistant:</p>")
         self.ui.textBrowser.append(f"<p style='color:blue'>{self.greeting}</p>")
         # Initialize the messages list
-        self.messages = [{'role': 'user', 'content': f'From now on, your role is my Oral {language} Teacher. Please keep your responses as short as possible. And you should stop and correct me at any time once you find my grammar is wrong.'}, {'role': 'assistant', 'content': 'Yes.'}]
-
+        self.messages = [{'role': 'user', 'content': f'From now on, your role is my Oral {self.language} Teacher. Please keep your responses in {self.language} as short as possible. And you should stop and correct me at any time once you find my grammar is wrong.'}, {'role': 'assistant', 'content': 'Yes.'}]
         # Play the greeting audio in a new thread, end the existing thread if it is still running
         if self.audio_on:
             threading._start_new_thread(self.audio, (self.greeting, self.language_code))
 
-    def audio(self, text, language_code):
-        tts = gTTS(text, lang=language_code, slow=False)
-        # Delete the old audio file
-        if os.path.exists(self.assi_mp3):
-            os.remove(self.assi_mp3)
-            # print('Deleting the existing assi.mp3 file...')
-        tts.save(self.assi_mp3)
-        playsound(self.assi_mp3)
-
     def chatbot(self):
-        # Initialize the messages list
-        self.messages = [{'role': 'user', 'content': 'From now on, your role is my Chatbot. Please keep your responses as short as possible.'}, {'role': 'assistant', 'content': 'Yes.'}]
         # Set groupBox title to Chatbot
         self.ui.groupBox.setTitle('Role: Chatbot')
         # Set the greeting in the textBrowser
@@ -311,16 +324,17 @@ class Super_Assistant(QMainWindow):
             self.greeting = f'Bienvenido al modo chatbot. ¿Cómo puedo ayudarte?'
         elif self.language_code == 'sv':
             self.greeting = f'Välkommen till chattbotläget. Hur kan jag hjälpa dig?'
+        # Set the greeting in the textBrowser
         self.ui.textBrowser.clear()
         self.ui.textBrowser.append(f"<p style='color:blue'>Assistant:</p>")
         self.ui.textBrowser.append(f"<p style='color:blue'>{self.greeting}</p>")
+        # Initialize the messages list
+        self.messages = [{'role': 'user', 'content': f'From now on, your role is my Chatbot. Please keep your following responses in {self.language} as short as possible. And try to be more proactive in our following conversation.'}, {'role': 'assistant', 'content': 'Yes.'}]
         # Play the greeting audio in a new thread, end the existing thread if it is still running
         if self.audio_on:
             threading._start_new_thread(self.audio, (self.greeting, self.language_code))
     
     def aisearch(self):
-        # Initialize the messages list
-        self.messages = [{'role': 'user', 'content': 'From now on, your role is my AI Search Engine. Please attach the supporting links to your responses.'}, {'role': 'assistant', 'content': 'Yes.'}]
         # Set groupBox title to Aisearch
         self.ui.groupBox.setTitle('Role: AI Search')
         # Set the greeting in the textBrowser
@@ -346,9 +360,12 @@ class Super_Assistant(QMainWindow):
             self.greeting = f'Bienvenido al modo de búsqueda AI. ¿Cómo puedo ayudarte?'
         elif self.language_code == 'sv':
             self.greeting = f'Välkommen till AI-sökläget. Hur kan jag hjälpa dig?'
+        # Set the greeting in the textBrowser
         self.ui.textBrowser.clear()
         self.ui.textBrowser.append(f"<p style='color:blue'>Assistant:</p>")
         self.ui.textBrowser.append(f"<p style='color:blue'>{self.greeting}</p>")
+        # Initialize the messages list
+        self.messages = [{'role': 'user', 'content': f'From now on, your role is my AI Search Engine. Please keep your following responses in {self.language}. And you should attach some supporting links to the end of your response.'}, {'role': 'assistant', 'content': 'Yes.'}]
         # Play the greeting audio in a new thread, end the existing thread if it is still running
         if self.audio_on:
             threading._start_new_thread(self.audio, (self.greeting, self.language_code))
