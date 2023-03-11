@@ -7,11 +7,14 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 
 ## Introduction
 ### Software
-1. ***Windows***
-<div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/interface_mac.png' alt='' width='700'/></div>
+Download the least version from the [***release page***](https://github.com/aguang5241/Py_chatGPT/releases), please STAR ⭐️ this repo if you like it.
+* ***MacOS***   
+<div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/interface_mac.png' alt='' width='700'/></div>   
 
-2. ***MacOS***
+* ***Windows***
 <div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/interface_win.png' alt='' width='700'/></div>
+
+👉🏻 ***Note:*** If there is no sound, you may need to install the [***FLAC***](https://xiph.org/flac/download.html) command line tool.   
 
 ### Scripts
 1. ***Py_chatGPT_text.py***
@@ -50,5 +53,4 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
     ```
 4. Enjoy!
 
-*****
-***Note: the python version version I used is 3.9.6, different versions may have different results.***
+👉🏻 ***Note:*** the python version version I used is 3.9.6, different versions may have different results.
