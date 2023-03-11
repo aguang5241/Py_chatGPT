@@ -1,1 +1,1 @@
-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
+YOUR OWN OPENAI_API_KEY!!! (https://platform.openai.com/account/api-keys)

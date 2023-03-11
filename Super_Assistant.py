@@ -29,7 +29,7 @@ class Call_ChatGPT(QThread):
         except Exception as e:
             self.signal_assistant.emit(str(e))
 
-class Call_Whisper(QThread):
+class Call_Speech_Recogizer(QThread):
     signal_user = pyqtSignal(str)
 
     def __init__(self, parent=None, user_mp3=None):
@@ -42,10 +42,11 @@ class Call_Whisper(QThread):
         with sr.AudioFile(self.user_mp3) as source:
             audio = r.record(source)
 
-        try:
-            user = r.recognize_whisper(audio_data=audio)
-        except Exception as e:
-            user = ''
+        # try:
+        #     user = r.recognize_whisper(audio_data=audio)
+        # except Exception as e:
+        #     user = ''
+        user = 'THIS IS A TEST, WITHOUT SPEECH RECOGNITION!!!'
         self.signal_user.emit(user)
 
 class Recorder():
@@ -382,9 +383,9 @@ class Super_Assistant(QMainWindow):
             self.ui.pushButton.setStyleSheet('color: black')
             self.ui.statusbar.showMessage('Recording stopped, record time: ' + str(round(self.rec_end - self.rec_begin, 2)) + 's')
             # Using QThread to run self.set_text()
-            self.call_whisper_thread = Call_Whisper(parent=None, user_mp3=self.user_mp3)
-            self.call_whisper_thread.start()
-            self.call_whisper_thread.signal_user.connect(self.set_text)
+            self.call_speech_recognizer_thread = Call_Speech_Recogizer(parent=None, user_mp3=self.user_mp3)
+            self.call_speech_recognizer_thread.start()
+            self.call_speech_recognizer_thread.signal_user.connect(self.set_text)
         else:
             print('Start recording')
             # Start recording
@@ -479,12 +480,12 @@ if __name__ == '__main__':
     # # For -D option
     # ROOT_PATH = os.path.dirname(sys.argv[0])
 
-    # For -F option
-    ROOT_PATH = os.path.dirname(sys.argv[0])
-    ROOT_PATH = ROOT_PATH.split('/Contents')[0] if 'Contents' in ROOT_PATH else os.path.join(ROOT_PATH, 'Super_Assistant.app')
+    # # For -F option
+    # ROOT_PATH = os.path.dirname(sys.argv[0])
+    # ROOT_PATH = ROOT_PATH.split('/Contents')[0] if 'Contents' in ROOT_PATH else os.path.join(ROOT_PATH, 'Super_Assistant.app')
 
-    # # For script debugging
-    # ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
+    # For script debugging
+    ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
     # app = QApplication([])
     # window = Super_Assistant()

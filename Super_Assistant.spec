@@ -1,12 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import copy_metadata
 
-datas = [('/Users/aguang/Coding/Py_chatGPT/python_venv/lib/python3.9/site-packages/whisper/assets/gpt2/*.txt', './whisper/assets/gpt2'),
-        ('/Users/aguang/Coding/Py_chatGPT/python_venv/lib/python3.9/site-packages/whisper/assets/gpt2/*json', './whisper/assets/gpt2'),
-        ('/Users/aguang/Coding/Py_chatGPT/python_venv/lib/python3.9/site-packages/whisper/assets/multilingual/*json', './whisper/assets/multilingual'),
-        ('/Users/aguang/Coding/Py_chatGPT/python_venv/lib/python3.9/site-packages/whisper/assets/multilingual/*txt', './whisper/assets/multilingual'),
-        ('/Users/aguang/Coding/Py_chatGPT/python_venv/lib/python3.9/site-packages/whisper/assets/*npz', './whisper/assets'),]
-
+datas = [('/Users/aguang/Coding/Py_chatGPT/py_venv/lib/python3.9/site-packages/whisper/assets/gpt2/*.txt', './whisper/assets/gpt2'), ('/Users/aguang/Coding/Py_chatGPT/py_venv/lib/python3.9/site-packages/whisper/assets/gpt2/*json', './whisper/assets/gpt2'), ('/Users/aguang/Coding/Py_chatGPT/py_venv/lib/python3.9/site-packages/whisper/assets/multilingual/*json', './whisper/assets/multilingual'), ('/Users/aguang/Coding/Py_chatGPT/py_venv/lib/python3.9/site-packages/whisper/assets/multilingual/*txt', './whisper/assets/multilingual'), ('/Users/aguang/Coding/Py_chatGPT/py_venv/lib/python3.9/site-packages/whisper/assets/*npz', './whisper/assets')]
 datas += copy_metadata('tqdm')
 datas += copy_metadata('regex')
 datas += copy_metadata('requests')
