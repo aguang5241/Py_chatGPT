@@ -7,8 +7,6 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 
 ## Introduction
 
-<video src="https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/final.mp4" controls="controls" width="500" height="300"></video>
-
 ### Software
 Download the least version from the [***release page***](https://github.com/aguang5241/Py_chatGPT/releases), please STAR ⭐️ this repo if you like it.
 * ***MacOS***   
