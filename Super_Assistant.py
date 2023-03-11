@@ -9,7 +9,7 @@ from gtts import gTTS
 from playsound import playsound
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtCore import QThread, pyqtSignal
-from Super_Assistant_UI import Ui_MainWindow as Super_Assistant_UI
+from Super_Assistant_UI_win import Ui_MainWindow as Super_Assistant_UI
 
 
 class Call_ChatGPT(QThread):
