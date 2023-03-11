@@ -452,13 +452,13 @@ class Super_Assistant(QMainWindow):
         file_dialog.setWindowTitle('Select the save path')
         file_dialog.setLabelText(QFileDialog.Accept, 'Save')
         file_dialog.setLabelText(QFileDialog.Reject, 'Cancel')
-        if file_dialog.exec_():
-            # Get the save path
-            save_path = file_dialog.selectedFiles()[0]
+        save_path = file_dialog.getSaveFileName(self, 'Save File', '', 'Text files (*.txt)')
+        if save_path[0]:
             # Save the chatlog
-            with open(save_path, 'w') as f:
+            with open(save_path[0], 'w') as f:
                 f.write(self.ui.textBrowser.toPlainText())
-        self.ui.statusbar.showMessage('Chatlog saved in ' + save_path)
+            # Update the statusbar
+            self.ui.statusbar.showMessage('Chatlog saved in ' + save_path[0])
     
     def load_chatlog(self):
         # Open a file dialog to select the chatlog file using the QFileDialog
@@ -470,35 +470,22 @@ class Super_Assistant(QMainWindow):
         file_dialog.setWindowTitle('Select the chatlog file')
         file_dialog.setLabelText(QFileDialog.Accept, 'Select')
         file_dialog.setLabelText(QFileDialog.Reject, 'Cancel')
-        if file_dialog.exec_():
-            # Get the chatlog path
-            chatlog_path = file_dialog.selectedFiles()[0]
+        chatlog_path = file_dialog.getOpenFileName(self, 'Open File', '', 'Text files (*.txt)')
+        if chatlog_path[0]:
             # Load the chatlog
-            with open(chatlog_path, 'r') as f:
+            with open(chatlog_path[0], 'r') as f:
                 content = f.readlines()
                 content = [x.strip() for x in content]
             for line in content:
-                if line.startswith('user'):
-                    self.messages.append({"role": "user", "content": line[5:]})
-                elif line.startswith('assistant'):
+                if line.startswith('You:'):
+                    self.messages.append({"role": "user", "content": line[4:]})
+                elif line.startswith('Assistant:'):
                     self.messages.append({"role": "assistant", "content": line[11:]})
-        self.ui.statusbar.showMessage(f'Chatlog {chatlog_path} loaded, ready to continue the conversation')
+            self.ui.statusbar.showMessage(f'Chatlog {chatlog_path[0]} loaded, ready to continue the conversation')
 
 if __name__ == '__main__':
-    # # For -D option
-    # ROOT_PATH = os.path.dirname(sys.argv[0])
-
-    # # For -F option
-    # ROOT_PATH = os.path.dirname(sys.argv[0])
-    # ROOT_PATH = ROOT_PATH.split('/Contents')[0] if 'Contents' in ROOT_PATH else os.path.join(ROOT_PATH, 'Super_Assistant.app')
-
-    # For script debugging
     ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-    # app = QApplication([])
-    # window = Super_Assistant()
-    # window.show()
-    # app.exec_()
     app = QApplication(sys.argv)
     window = Super_Assistant()
     window.show()
