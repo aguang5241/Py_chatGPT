@@ -265,7 +265,7 @@ class Super_Assistant(QMainWindow):
 
     def oral_teacher(self):
         # Set groupBox title to Chatbot
-        self.ui.groupBox.setTitle('Role: Chatbot')
+        self.ui.groupBox.setTitle('Role: Oral Teacher')
         # Set the greeting in the textBrowser
         if self.language_code == 'en':
             self.greeting = f'Welcome to the Oral Teacher Mode. I will help you to improve your oral English. How can I help you?'
