@@ -259,7 +259,7 @@ class Super_Assistant(QMainWindow):
             self.oral_teacher()
         elif self.role == 'Chatbot':
             self.chatbot()
-        elif self.role == 'Aisearch':
+        elif self.role == 'AI Search':
             self.aisearch()
 
     def oral_teacher(self):
