@@ -6,6 +6,14 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 [***YouTube***](https://youtu.be/H9Ss8RYrTw8)
 
 ## Introduction
+### Software
+1. ***Windows***
+<div align=left><img src='https://raw.githubusercontent.com/aguang5241/HEA_ML/main/res/inerface_mac.png' alt='' width='700'/></div>
+
+2. ***MacOS***
+<div align=left><img src='https://raw.githubusercontent.com/aguang5241/HEA_ML/main/res/inerface_win.png' alt='' width='700'/></div>
+
+### Scripts
 1. ***Py_chatGPT_text.py***
 * Communicate with the chatbot by typing.
 * Can save/load the chat history.
@@ -22,7 +30,7 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 * Can save/load the chat history.
 * Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
 
-## Getting Started
+### Getting Started
 1. Prepare your own chatGPT api key and save it in the `openai_api_key.txt` file
 2. Install the dependencies
     ```bash
