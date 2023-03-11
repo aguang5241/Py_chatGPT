@@ -5,9 +5,7 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 
 [***Youtube***](https://youtu.be/iyeYOZbsM9c)
 
-## Introduction
-
-### Software
+## Software
 Download the least version from the [***release page***](https://github.com/aguang5241/Py_chatGPT/releases), please STAR ⭐️ this repo if you like it.
 * ***MacOS***   
 <div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/interface_mac.png' alt='' width='700'/></div>   
@@ -17,7 +15,8 @@ Download the least version from the [***release page***](https://github.com/agua
 
 👉🏻 ***Note:*** If there is no sound, you may need to install the [***FLAC***](https://xiph.org/flac/download.html) command line tool.   
 
-### Scripts
+## Source Code
+### Introduction
 1. ***Py_chatGPT_text.py***
 * Communicate with the chatbot by typing.
 * Can save/load the chat history.
