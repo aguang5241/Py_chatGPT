@@ -238,8 +238,8 @@ class Super_Assistant(QMainWindow):
             self.role = 'Oral Teacher'
         elif role == 'Chatbot':
             self.role = 'Chatbot'
-        elif role == 'Aisearch':
-            self.role = 'Aisearch'
+        elif role == 'AI Search':
+            self.role = 'AI Search'
 
     def set_language(self):
         # Uncheck the others when one is checked in the menuLanguages
@@ -261,6 +261,7 @@ class Super_Assistant(QMainWindow):
             self.chatbot()
         elif self.role == 'AI Search':
             self.aisearch()
+
 
     def oral_teacher(self):
         # Set groupBox title to Chatbot
