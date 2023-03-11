@@ -32,21 +32,29 @@ class Call_ChatGPT(QThread):
 class Call_Speech_Recogizer(QThread):
     signal_user = pyqtSignal(str)
 
-    def __init__(self, parent=None, user_mp3=None):
+    def __init__(self, parent=None, user_mp3=None, language_code=None):
         super().__init__(parent)
         self.parent = parent
         self.user_mp3 = user_mp3
+        self.language_code = language_code
 
     def run(self):
         r = sr.Recognizer()
         with sr.AudioFile(self.user_mp3) as source:
             audio = r.record(source)
 
+        # Using Google Speech Recognition
+        try:
+            user = r.recognize_google(audio_data=audio, language=self.language_code)
+        except Exception as e:
+            user = str(e)
+
+        # # Using Whisper Speech Recognition
         # try:
         #     user = r.recognize_whisper(audio_data=audio)
         # except Exception as e:
         #     user = ''
-        user = 'THIS IS A TEST, WITHOUT SPEECH RECOGNITION!!!'
+
         self.signal_user.emit(user)
 
 class Recorder():
@@ -102,7 +110,7 @@ class Super_Assistant(QMainWindow):
 
         self.root_path = ROOT_PATH
 
-        self.ui.textBrowser.append(f"<p style='color:red'>Root path: {self.root_path}</p>")
+        # self.ui.textBrowser.append(f"<p style='color:red'>Root path: {self.root_path}</p>")
 
         self.assi_mp3 = self.root_path + '/assi.mp3'
         self.user_mp3 = self.root_path + '/user.mp3'
@@ -383,7 +391,7 @@ class Super_Assistant(QMainWindow):
             self.ui.pushButton.setStyleSheet('color: black')
             self.ui.statusbar.showMessage('Recording stopped, record time: ' + str(round(self.rec_end - self.rec_begin, 2)) + 's')
             # Using QThread to run self.set_text()
-            self.call_speech_recognizer_thread = Call_Speech_Recogizer(parent=None, user_mp3=self.user_mp3)
+            self.call_speech_recognizer_thread = Call_Speech_Recogizer(parent=None, user_mp3=self.user_mp3, language_code=self.language_code)
             self.call_speech_recognizer_thread.start()
             self.call_speech_recognizer_thread.signal_user.connect(self.set_text)
         else:
