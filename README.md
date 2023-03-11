@@ -8,10 +8,10 @@ Python-based chatbot using chatGPT API, supporting both text-based and voice-bas
 ## Introduction
 ### Software
 1. ***Windows***
-<div align=left><img src='https://raw.githubusercontent.com/aguang5241/HEA_ML/main/res/inerface_mac.png' alt='' width='700'/></div>
+<div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/inerface_mac.png' alt='' width='700'/></div>
 
 2. ***MacOS***
-<div align=left><img src='https://raw.githubusercontent.com/aguang5241/HEA_ML/main/res/inerface_win.png' alt='' width='700'/></div>
+<div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/inerface_win.png' alt='' width='700'/></div>
 
 ### Scripts
 1. ***Py_chatGPT_text.py***
