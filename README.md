@@ -26,7 +26,7 @@ Download the least version from the [***release page***](https://github.com/agua
         xattr -d com.apple.quarantine /path/to/Super_Assistant.app
         ```
         4. Then you can run the `Super_Assistant.app`.
-        5. If you get the error message `FLAC conversion utility not available - consider installing the FLAC command line application by running `apt-get install flac` or your operating system's equivalent` when you are recording, you may download and use ``Super_Assistant` Unix executable file instead.
+        5. If you get the error message `FLAC conversion utility not available - consider installing the FLAC command line application by running apt-get install flac or your operating system's equivalent` when you are recording, you may download and use ``Super_Assistant` Unix executable file instead.
 
     * If you cannot open the `Super_Assistant` Unix executable file, you may need to do the following steps:
         1. The first time you run the `Super_Assistant` Unix executable file, you may see the following error message `"Super_Assistant" cannot be opened because it is from an unidentified developer`. Go to `System Preferences -> Security & Privacy -> General -> Open Anyway`. After that you may see the following error message `macOS cannot verify the developer of “Super_Assistant”. Are you sure you want to open it?`, please click `Cancel`.
