@@ -13,7 +13,9 @@ Download the least version from the [***release page***](https://github.com/agua
 * ***Windows***
 <div align=left><img src='https://raw.githubusercontent.com/aguang5241/Py_chatGPT/main/res/interface_win.png' alt='' width='700'/></div>
 
-👉🏻 ***Note:*** If there is no sound, you may need to install the [***FLAC***](https://xiph.org/flac/download.html) command line tool.   
+👉🏻 ***Note:*** 
+* If there is no sound, you may need to install the [***FLAC***](https://xiph.org/flac/download.html) command line tool.
+* For MacOS users, please grant the microphone permission to the `Super_Assistant.app` file in the `System Preferences` -> `Security & Privacy` -> `Privacy` -> `Microphone` section. If the `Super_Assistant.app` file fail to find **FLAC** even if you have installed it, you can try to download and run the `Super_Assistant` Unix executable file instead.
 
 ## Source Code
 ### Introduction
