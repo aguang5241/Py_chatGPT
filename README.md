@@ -38,21 +38,30 @@ Download the least version from the [***release page***](https://github.com/agua
 
 ## Source Code
 ### Introduction
-1. ***Py_chatGPT_text.py***
-* Communicate with the chatbot by typing.
-* Can save/load the chat history.
+* ***script/***
+    * ***Py_chatGPT_text.py***
+        * Communicate with the chatbot by typing.
+        * Can save/load the chat history.
 
-2. ***Py_chatGPT_voice_auto.py***
-* Will automatically start and stop the recording based on the voice activity.
-* Real-time communication with the chatbot by voice.
-* Can save/load the chat history.
-* Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
+    * ***Py_chatGPT_voice_auto.py | script/Py_chatGPT_voice_manual.py***
+        * Real-time communication with the chatbot by voice.
+        * Can save/load the chat history.
+        * Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
+        * `Py_chatGPT_voice_auto.py` will automatically start and stop the recording based on the voice activity.
+        * `Py_chatGPT_voice_manual.py` need user to manually start and stop the recording.
 
-3. ***Py_chatGPT_voice_manual.py (Recommended)***
-* Need to manually start and stop the recording.
-* Real-time communication with the chatbot by voice.
-* Can save/load the chat history.
-* Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
+* ***software/***
+    * ***Super_Assistant.py***
+        * The main program of the software.
+        * The GUI is based on the PyQt5 library.
+        * The voice recognition is based on the Google Text-to-Speech and Speech-to-Text API.
+        * The chatbot is based on the chatGPT API.
+    * ***Super_Assitant_UI.ui | Super_Assistant_UI.py | Super_Assistant_UI_win.ui | Super_Assistant_UI_win.py***
+        * The UI files of the software and the converted python files for MacOS and Windows.
+        * The UI is based on the Qt Designer.
+    * ***pyinstaller.md | Super_Assistant.spec***
+        * The pyinstaller command file and the pyinstaller configuration file.
+    
 
 ### Getting Started
 1. Prepare your own chatGPT api key and save it in the `openai_api_key.txt` file
