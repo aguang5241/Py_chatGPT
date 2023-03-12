@@ -59,8 +59,8 @@ Download the least version from the [***release page***](https://github.com/agua
     * ***Super_Assitant_UI(_win).ui/py***
         * The UI files of the software and the converted python files for MacOS and Windows.
         * The UI is based on the Qt Designer.
-    * ***Super_Assistant.md | Super_Assistant.spec***
-        * The pyinstaller command file and the pyinstaller configuration file.
+    * ***Super_Assistant.md/spec***
+        * The markdown file and the spec file of the software using [***PyInstaller***](https://www.pyinstaller.org/).
     
 
 ### Getting Started
