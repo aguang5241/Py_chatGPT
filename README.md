@@ -43,7 +43,7 @@ Download the least version from the [***release page***](https://github.com/agua
         * Communicate with the chatbot by typing.
         * Can save/load the chat history.
 
-    * ***Py_chatGPT_voice_auto.py | script/Py_chatGPT_voice_manual.py***
+    * ***Py_chatGPT_voice_auto/mannual.py***
         * Real-time communication with the chatbot by voice.
         * Can save/load the chat history.
         * Based on the Google Text-to-Speech API and the Whisper Speech-to-Text API.
@@ -56,10 +56,10 @@ Download the least version from the [***release page***](https://github.com/agua
         * The GUI is based on the PyQt5 library.
         * The voice recognition is based on the Google Text-to-Speech and Speech-to-Text API.
         * The chatbot is based on the chatGPT API.
-    * ***Super_Assitant_UI.ui | Super_Assistant_UI.py | Super_Assistant_UI_win.ui | Super_Assistant_UI_win.py***
+    * ***Super_Assitant_UI(_win).ui/py***
         * The UI files of the software and the converted python files for MacOS and Windows.
         * The UI is based on the Qt Designer.
-    * ***pyinstaller.md | Super_Assistant.spec***
+    * ***Super_Assistant.md | Super_Assistant.spec***
         * The pyinstaller command file and the pyinstaller configuration file.
     
 
