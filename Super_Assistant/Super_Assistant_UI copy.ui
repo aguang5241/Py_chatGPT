@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Jarvis</string>
+   <string>Super Assistant</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
@@ -36,7 +36,7 @@
      </font>
     </property>
     <property name="title">
-     <string>Character: Oral Teacher</string>
+     <string>Role: Oral Teacher</string>
     </property>
     <widget class="QTextBrowser" name="textBrowser">
      <property name="geometry">
@@ -90,7 +90,7 @@ p, li { white-space: pre-wrap; }
       </size>
      </property>
      <property name="checked">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -176,36 +176,13 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>Settings</string>
     </property>
-    <widget class="QMenu" name="menuCharacters">
+    <widget class="QMenu" name="menuRoles">
      <property name="title">
-      <string>AI Characters</string>
+      <string>Roles</string>
      </property>
-     <addaction name="actionAcademician"/>
-     <addaction name="actionAdventure_Game"/>
-     <addaction name="actionBook_Movie_Anything_Character"/>
-     <addaction name="actionChef"/>
-     <addaction name="actionDentist"/>
-     <addaction name="actionDoctor"/>
-     <addaction name="actionDream_Interpreter"/>
-     <addaction name="actionEssay_Writer"/>
-     <addaction name="actionHistorian"/>
-     <addaction name="actionMental_Health_Advisor"/>
-     <addaction name="actionMotivational_Speaker"/>
-     <addaction name="actionMovie_Critic"/>
-     <addaction name="actionNovelist"/>
      <addaction name="actionOral_Teacher"/>
-     <addaction name="actionPassword_Generator"/>
-     <addaction name="actionPoet"/>
-     <addaction name="actionInterviewer"/>
-     <addaction name="actionRapper"/>
-     <addaction name="actionSearch_Engine"/>
-     <addaction name="actionSong_Recommender"/>
-     <addaction name="actionStand_up_Comedian"/>
-     <addaction name="actionStoryteller"/>
-     <addaction name="actionTitle_Generator"/>
-     <addaction name="actionTranslator"/>
-     <addaction name="actionTravel_Guide"/>
-     <addaction name="actionWriting_Tutor"/>
+     <addaction name="actionChatbot"/>
+     <addaction name="actionAisearch"/>
     </widget>
     <widget class="QMenu" name="menuAPI_Key">
      <property name="title">
@@ -215,7 +192,7 @@ p, li { white-space: pre-wrap; }
     </widget>
     <widget class="QMenu" name="menuLanguages">
      <property name="title">
-      <string>AI Languages</string>
+      <string>Languages</string>
      </property>
      <addaction name="actionChinese"/>
      <addaction name="actionGerman"/>
@@ -230,7 +207,7 @@ p, li { white-space: pre-wrap; }
      <addaction name="actionSwedish"/>
     </widget>
     <addaction name="menuLanguages"/>
-    <addaction name="menuCharacters"/>
+    <addaction name="menuRoles"/>
     <addaction name="menuAPI_Key"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -244,8 +221,8 @@ p, li { white-space: pre-wrap; }
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionLoad"/>
     <addaction name="actionSave"/>
+    <addaction name="actionLoad"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -263,20 +240,20 @@ p, li { white-space: pre-wrap; }
     <string>Oral Teacher</string>
    </property>
   </action>
-  <action name="actionPoet">
+  <action name="actionChatbot">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Poet</string>
+    <string>Chatbot</string>
    </property>
   </action>
-  <action name="actionSearch_Engine">
+  <action name="actionAisearch">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Search Engine</string>
+    <string>AI Search</string>
    </property>
   </action>
   <action name="actionEnglish">
@@ -329,6 +306,17 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>German</string>
+   </property>
+  </action>
+  <action name="actionEnglish">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>English</string>
    </property>
   </action>
   <action name="actionSpanish">
@@ -393,198 +381,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>Swedish</string>
-   </property>
-  </action>
-  <action name="actionTranslator">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Translator</string>
-   </property>
-  </action>
-  <action name="actionInterviewer">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Interviewer</string>
-   </property>
-  </action>
-  <action name="actionTravel_Guide">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Travel Guide</string>
-   </property>
-  </action>
-  <action name="actionBook_Movie_Anything_Character">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Book/Movie/Angthing Character </string>
-   </property>
-  </action>
-  <action name="actionStoryteller">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Storyteller</string>
-   </property>
-  </action>
-  <action name="actionWriting_Tutor">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Writing Tutor</string>
-   </property>
-  </action>
-  <action name="actionMental_Health_Advisor">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Mental Health Advisor</string>
-   </property>
-  </action>
-  <action name="actionDoctor">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Doctor</string>
-   </property>
-  </action>
-  <action name="actionChef">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Chef</string>
-   </property>
-  </action>
-  <action name="actionAdventure_Game">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Adventure Game</string>
-   </property>
-  </action>
-  <action name="actionDream_Interpreter">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Dream Interpreter</string>
-   </property>
-  </action>
-  <action name="actionPassword_Generator">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Password Generator</string>
-   </property>
-  </action>
-  <action name="actionPsychologist">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Psychologist</string>
-   </property>
-  </action>
-  <action name="actionAcademician">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Academician</string>
-   </property>
-  </action>
-  <action name="actionEssay_Writer">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Essay Writer</string>
-   </property>
-  </action>
-  <action name="actionHistorian">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Historian</string>
-   </property>
-  </action>
-  <action name="actionTitle_Generator">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Title Generator</string>
-   </property>
-  </action>
-  <action name="actionSong_Recommender">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Song Recommender</string>
-   </property>
-  </action>
-  <action name="actionStand_up_Comedian">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Stand-up Comedian</string>
-   </property>
-  </action>
-  <action name="actionNovelist">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Novelist</string>
-   </property>
-  </action>
-  <action name="actionRapper">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Rapper</string>
-   </property>
-  </action>
-  <action name="actionMotivational_Speaker">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Motivational Speaker</string>
-   </property>
-  </action>
-  <action name="actionDentist">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Dentist</string>
-   </property>
-  </action>
-  <action name="actionMovie_Critic">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Movie Critic</string>
    </property>
   </action>
  </widget>
