@@ -183,6 +183,7 @@ class Super_Assistant(QMainWindow):
         self.ui.actionChef.triggered.connect(self.set_roles)
         self.ui.actionDentist.triggered.connect(self.set_roles)
         self.ui.actionDoctor.triggered.connect(self.set_roles)
+        self.ui.actionDream_Interpreter.triggered.connect(self.set_roles)
         self.ui.actionEssay_Writer.triggered.connect(self.set_roles)
         self.ui.actionHistorian.triggered.connect(self.set_roles)
         self.ui.actionMental_Health_Advisor.triggered.connect(self.set_roles)
@@ -223,6 +224,7 @@ class Super_Assistant(QMainWindow):
         self.ui.actionChef.triggered.connect(self.chef)
         self.ui.actionDentist.triggered.connect(self.dentist)
         self.ui.actionDoctor.triggered.connect(self.doctor)
+        self.ui.actionDream_Interpreter.triggered.connect(self.dream_interpreter)
         self.ui.actionEssay_Writer.triggered.connect(self.essay_writer)
         self.ui.actionHistorian.triggered.connect(self.historian)
         self.ui.actionMental_Health_Advisor.triggered.connect(self.mental_health_advisor)
@@ -292,6 +294,7 @@ class Super_Assistant(QMainWindow):
         # Set the role
         role = checked_action.text()
         self.role = role
+        print('Role:', self.role)
 
 
     def set_language(self):
@@ -329,6 +332,9 @@ class Super_Assistant(QMainWindow):
         elif 'Doctor' in self.role:
             # print('Doctor')
             self.doctor()
+        elif 'Dream Interpreter' in self.role:
+            print('Dream Interpreter')
+            self.dream_interpreter()
         elif 'Essay Writer' in self.role:
             # print('Essay Writer')
             self.essay_writer()
@@ -782,6 +788,44 @@ class Super_Assistant(QMainWindow):
         # Initialize the messages list
         prompt = f"I want you to act as a doctor and come up with creative treatments for illnesses or diseases. You will reply to me in {self.language}. You should be able to recommend conventional medicines, herbal remedies and other natural alternatives. You will also need to consider the patient‘s age, lifestyle and medical history when providing your recommendations."
         self.messages = [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': 'Yes. Please tell me what is your medical problem.'}]
+        # Play the greeting audio in a new thread, end the existing thread if it is still running
+        if self.audio_on:
+            threading._start_new_thread(self.audio, (self.greeting, self.language_code))
+    
+    def dream_interpreter(self):
+        # Set groupBox title to Chatbot
+        self.ui.groupBox.setTitle('Character: Dream Interpreter ')
+        # Set the greeting in the textBrowser
+        if self.language_code == 'en':
+            self.greeting = f'Welcome to the Dream Interpreter Mode. Please tell me what is your dream about.'
+        elif self.language_code == 'zh-CN':
+            self.greeting = f'欢迎来到梦境解释者模式。请告诉我你的梦境是关于什么的。'
+        elif self.language_code == 'fr':
+            self.greeting = f"Bienvenue dans le mode interprète de rêves. Veuillez me dire de quoi est votre rêve."
+        elif self.language_code == 'de':
+            self.greeting = f'Willkommen im Traum-Interpreter-Modus. Bitte sagen Sie mir, worum es in Ihrem Traum geht.'
+        elif self.language_code == 'it':
+            self.greeting = f"Benvenuti nella modalità interprete dei sogni. Per favore dì di cosa è il tuo sogno."
+        elif self.language_code == 'ja':
+            self.greeting = f'夢の解釈者モードへようこそ。あなたの夢は何についてですか。'
+        elif self.language_code == 'ko':
+            self.greeting = f'꿈 해석가 모드에 오신 것을 환영합니다. 꿈은 무엇에 관한 것입니까.'
+        elif self.language_code == 'pl':
+            self.greeting = f'Witamy w trybie tłumacza snów. Proszę powiedzieć mi, o co chodzi w twoim snie.'
+        elif self.language_code == 'ru':
+            self.greeting = f'Добро пожаловать в режим переводчика снов. Пожалуйста, скажите мне, о чем ваш сон.'
+        elif self.language_code == 'es':
+            self.greeting = f'Bienvenido al modo intérprete de sueños. Por favor, dime de qué trata tu sueño.'
+        elif self.language_code == 'sv':
+            self.greeting = f'Välkommen till dröm tolkning läge. Vänligen säg mig vad din dröm handlar om.'
+        # Set the greeting in the textBrowser
+        self.ui.textBrowser.clear()
+        self.ui.textBrowser.append(f"<p >Assistant:</p>")
+        # self.ui.textBrowser.append(f"<p >{self.greeting}</p>")
+        self.ui.textBrowser.append(self.greeting)
+        # Initialize the messages list
+        prompt = f"I want you to act as a dream interpreter. You will reply to me in {self.language}. I will give you descriptions of my dreams, and you will provide interpretations based on the symbols and themes present in the dream. Do not provide personal opinions or assumptions about the dreamer. Provide only factual interpretations based on the information given."
+        self.messages = [{'role': 'user', 'content': prompt}, {'role': 'assistant', 'content': 'Yes. Please tell me what is your dream about.'}]
         # Play the greeting audio in a new thread, end the existing thread if it is still running
         if self.audio_on:
             threading._start_new_thread(self.audio, (self.greeting, self.language_code))
