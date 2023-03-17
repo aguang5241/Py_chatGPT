@@ -13,9 +13,8 @@ from Super_Assistant_UI import Ui_MainWindow as Super_Assistant_UI
 from qt_material import apply_stylesheet
 import qtawesome as qta
 
-
 class Call_ChatGPT(QThread):
-    signal_assistant = pyqtSignal(str)
+    signal_assistant = pyqtSignal(dict)
 
     def __init__(self, parent=None, messages=None):
         super().__init__(parent)
@@ -26,7 +25,9 @@ class Call_ChatGPT(QThread):
         try:
             completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=self.messages)
             # Get the assistant response
-            assistant = completion['choices'][0]['message']['content']
+            content = completion['choices'][0]['message']['content']
+            total_tokens = completion['usage']['total_tokens']
+            assistant = {'content': content, 'total_tokens': total_tokens}
             self.signal_assistant.emit(assistant)
         except Exception as e:
             self.signal_assistant.emit(str(e))
@@ -471,18 +472,21 @@ class Super_Assistant(QMainWindow):
         self.call_chatgpt_thread.signal_assistant.connect(self.send_text)
 
     def send_text(self, assistant):
+        content = assistant['content']
+        total_tokens = assistant['total_tokens']
         # print('assistant: ', assistant)
-        self.messages.append({"role": "assistant", "content": assistant})
+        self.messages.append({"role": "assistant", "content": content})
         # print(self.messages)
         # Set the assistant response in the textBrowser
         self.ui.textBrowser.append(f"<p >Assistant:</p>")
         # self.ui.textBrowser.append(f"<p >{assistant}</p>")
-        self.ui.textBrowser.append(assistant)
+        self.ui.textBrowser.append(content)
+        self.ui.textBrowser.append(f"<p style='color:gray'>Total tokens: {total_tokens}</p>")
         # Scroll to the bottom of the textBrowser
         self.ui.textBrowser.verticalScrollBar().setValue(self.ui.textBrowser.verticalScrollBar().maximum())
         # Play the assistant audio in a new thread
         if self.audio_on:
-            threading._start_new_thread(self.audio, (assistant, self.language_code))
+            threading._start_new_thread(self.audio, (content, self.language_code))
     
     def save_chatlog(self):
         # Open a file dialog to select the save path using the QFileDialog
@@ -496,10 +500,12 @@ class Super_Assistant(QMainWindow):
         file_dialog.setLabelText(QFileDialog.Accept, 'Save')
         file_dialog.setLabelText(QFileDialog.Reject, 'Cancel')
         save_path = file_dialog.getSaveFileName(self, 'Save File', '', 'Text files (*.txt)')
+        # Format the messages list to a string and save it
+        messages = '\n'.join([f"{message['role']}: {message['content']}" for message in self.messages])
         if save_path[0]:
             # Save the chatlog
             with open(save_path[0], 'w') as f:
-                f.write(self.ui.textBrowser.toPlainText())
+                f.write(messages)
             # Update the statusbar
             self.ui.statusbar.showMessage('Chatlog saved in ' + save_path[0])
     
@@ -520,9 +526,9 @@ class Super_Assistant(QMainWindow):
                 content = f.readlines()
                 content = [x.strip() for x in content]
             for line in content:
-                if line.startswith('You:'):
+                if line.startswith('user:'):
                     self.messages.append({"role": "user", "content": line[4:]})
-                elif line.startswith('Assistant:'):
+                elif line.startswith('assistant:'):
                     self.messages.append({"role": "assistant", "content": line[11:]})
             self.ui.statusbar.showMessage(f'Chatlog {chatlog_path[0]} loaded, ready to continue the conversation')
     

@@ -132,3 +132,4 @@ dmypy.json
 # Other
 *.mp3
 .DS_Store
+/My_Assistant
