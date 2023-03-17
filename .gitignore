@@ -131,5 +131,6 @@ dmypy.json
 
 # Other
 *.mp3
-.DS_Store
+**/.DS_Store
 /My_Assistant
+/Super_Assistant/setup.py
